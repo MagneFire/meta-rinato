@@ -1,2 +1,2 @@
-FILESEXTRAPATHS:prepend:sturgeon := "${THISDIR}/asteroid-launcher:"
-SRC_URI:append:sturgeon = " file://default.conf"
+FILESEXTRAPATHS:prepend:rinato := "${THISDIR}/asteroid-launcher:"
+SRC_URI:append:rinato = " file://default.conf"

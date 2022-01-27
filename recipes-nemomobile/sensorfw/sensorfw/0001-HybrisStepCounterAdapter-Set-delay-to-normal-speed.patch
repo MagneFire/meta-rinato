@@ -2,7 +2,7 @@ From 45f0baec9a7db16db50a7a309486afeef4b20f61 Mon Sep 17 00:00:00 2001
 From: MagneFire <IDaNLContact@gmail.com>
 Date: Tue, 1 Dec 2020 20:24:52 +0100
 Subject: [PATCH] HybrisStepCounterAdapter: Set delay to normal speed. Fixes
- the stepcounter on at least sturgeon.
+ the stepcounter on at least rinato.
 
 ---
  adaptors/hybrisstepcounteradaptor/hybrisstepcounteradaptor.cpp | 2 ++

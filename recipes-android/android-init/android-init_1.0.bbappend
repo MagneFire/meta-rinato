@@ -1,1 +1,1 @@
-FILESEXTRAPATHS:prepend:sturgeon := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend:rinato := "${THISDIR}/${PN}:"

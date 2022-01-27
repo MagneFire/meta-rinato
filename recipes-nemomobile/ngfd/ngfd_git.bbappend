@@ -1,1 +1,1 @@
-RDEPENDS:${PN}:append:sturgeon = " ngfd-plugin-droid-vibrator "
+RDEPENDS:${PN}:append:rinato = " ngfd-plugin-droid-vibrator "
