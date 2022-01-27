@@ -1,38 +1,39 @@
-require recipes-kernel/linux/linux.inc
-inherit gettext
+#require recipes-kernel/linux/linux.inc
+#inherit gettext
+require recipes-kernel/linux/linux-yocto.inc
 
 SECTION = "kernel"
-SUMMARY = "Android kernel for the Huawei Watch"
+SUMMARY = "Mainline kernel for Samsung Gear 2"
 HOMEPAGE = "https://android.googlesource.com/"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 COMPATIBLE_MACHINE = "rinato"
 
-SRC_URI = " git://android.googlesource.com/kernel/msm;branch=android-msm-rinato-3.10-marshmallow-dr1-wear-release;protocol=https \
+SRC_URI = "git://github.com/torvalds/linux.git;protocol=https \
+    file://0001-ARM-dts-Fix-booting-on-Rinato-market-device.patch \
     file://defconfig \
     file://img_info \
-    file://0001-scripts-dtc-Remove-redundant-YYLOC-global-declaratio.patch \
-    file://0002-Revert-Enable-Nitrous-BT-power-management-driver.patch \
-    file://0003-Revert-Add-Nitrous-driver-for-BT-power-management.patch \
-    file://0004-Revert-net-bluetooth-fix-CVE-2015-8956.patch \
-    file://0005-Backport-mainline-4.1-Bluetooth-subsystem.patch \
-    file://0006-fix-gcc5-build.patch \
-    file://0007-ARM-uaccess-remove-put_user-code-duplication.patch \
-    file://0008-tap-to-wake-fix.patch \
-    file://0009-bluesleep-Use-kernel-s-HCI-events-instead-of-proc-bl.patch \
-    file://0010-synaptics_i2c_rmi4-Adds-a-wakelock-when-the-screen-i.patch \
 "
 
-SRCREV = "97abcf5b24684a46530ffc8a4748dd7ae6c2e65a"
-LINUX_VERSION ?= "3.10"
+SRCREV = "df0cc57e057f18e44dac8e6c18aba47ab53202f9"
+LINUX_VERSION ?= "5.16"
 PV = "${LINUX_VERSION}+marshmallow"
 S = "${WORKDIR}/git"
 B = "${S}"
 
 do_install:append() {
     rm -rf ${D}/usr/src/usr/
+    ln -s ${D}/boot/zImage-5.16.0-yocto-standard ${D}/boot/zImage
+#    ls arch/arm/boot/
+#    scripts/dtc/dtc -O dtb -o arch/arm/boot/dts/exynos3250-rinato.dtb arch/arm/boot/dts/exynos3250-rinato.dts
+#    cat arch/arm/boot/zImage arch/arm/boot/dts/exynos3250-rinato.dtb > arch/arm/boot/zImage-dtb
+
 }
 
 BOOT_PARTITION = "/dev/mmcblk0p15"
 
-inherit mkboot old-kernel-gcc-hdrs
+#inherit mkboot old-kernel-gcc-hdrs
+KERNEL_DEVICETREE = "exynos3250-rinato.dtb"
+KERNEL_DEVICETREE_BUNDLE = "1"
+#KERNEL_IMAGEDEST = "git/arch/arm/boot/"
+#KERNEL_DTB_BIN_EXT = "-dtb"
